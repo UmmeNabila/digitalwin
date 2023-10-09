@@ -50,17 +50,14 @@ model.add(Dense(100, kernel_initializer='normal', activation= "relu"))
 model.add(Dense(100, kernel_initializer='normal', activation= "relu"))
 #Last layer (use linear activation and set nodes to number of Y columns/labels/outputs
 model.add(Dense(1, kernel_initializer='normal', activation='linear'))
-
-
 model.compile(loss='mean_squared_error', optimizer=Adam(learning_rate=learning_rate), metrics=['mean_squared_error'])
 model.summary()
 
 checkpoint = ModelCheckpoint('mymodel.pkl', monitor='val_mean_absolute_error', save_best_only=True, mode='min', verbose=1)
 history=model.fit(Xtrain, Ytrain, epochs=100, batch_size=16, validation_split = 0.15, callbacks=[checkpoint], verbose=True)
 
-
-pred_train=model.predict(Xtrain)
-df_train=pd.DataFrame(pred_train)
-train_metrics_nn=calc_metric(Ytrain, df_train)
-print('NN Train=', train_metrics_nn)
-
+Ynn=model.predict(Xtest)
+mae=mean_absolute_error(Ytest,Ynn)
+rmse=np.sqrt(mean_squared_error(Ytest,Ynn))
+r2=r2_score(Ytest,Ynn)
+print('MAE=',mae, 'RMSE=',rmse, 'R2=', r2)
