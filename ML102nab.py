@@ -56,7 +56,7 @@ model.compile(loss='mean_squared_error', optimizer=Adam(learning_rate=learning_r
 model.summary()
 
 checkpoint = ModelCheckpoint('mymodel.pkl', monitor='val_mean_absolute_error', save_best_only=True, mode='min', verbose=1)
-history=model.fit(Xtrain, Ytrain, epochs=20, batch_size=8, validation_split = 0.15, callbacks=[checkpoint], verbose=True)
+history=model.fit(Xtrain, Ytrain, epochs=100, batch_size=16, validation_split = 0.15, callbacks=[checkpoint], verbose=True)
 
 
 pred_train=model.predict(Xtrain)
