@@ -10,7 +10,7 @@ import random
 #     max_val = data[qoi].max()
 #     return ((data[qoi] - min_val) / (max_val - min_val))
 
-colnames_path = Path.cwd() / 'digitalwin/colnames.txt'
+colnames_path = Path.home() /'aims'  / 'digitalwin/colnames.txt'
 with colnames_path.open('r') as colnames_file:
     colnames = [colname.strip() for colname in colnames_file.readlines()]
 
